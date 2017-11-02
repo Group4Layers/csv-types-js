@@ -1,8 +1,10 @@
 # CSV Types (csv-types-js)
 
-[![JavaScript](https://img.shields.io/badge/made_in-javascript-fed93d.svg?style=flat-square)](https://developer.mozilla.org/docs/Web/JavaScript) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/rNoz/csv-types-js/blob/master/LICENSE.md) [![Coverage](https://img.shields.io/badge/coverage-98.15%25-green.svg)](https://github.com/rNoz/csv-types-js) [![Tests](https://img.shields.io/badge/tests-32%2F32-green.svg)](https://github.com/rNoz/csv-types-js)
+[![JavaScript](https://img.shields.io/badge/made_in-javascript-fed93d.svg?style=flat-square)](https://developer.mozilla.org/docs/Web/JavaScript) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/rNoz/csv-types-js/blob/master/LICENSE.md) [![Coverage](https://img.shields.io/badge/coverage-98.12%25-green.svg)](https://github.com/rNoz/csv-types-js) [![Tests](https://img.shields.io/badge/tests-32%2F32-green.svg)](https://github.com/rNoz/csv-types-js)
 
 CSV Types (csv-types-js) is a JavaScript library to parse CSV (comma separated values) strings and produce a JavaScript AST (abstract syntax tree) with the data. It also supports *types specs*: multiple headers-values (tables) per csv string.
+
+It has been tested with `node >= 6`.
 
 ## Table of Contents
 
@@ -73,6 +75,12 @@ type-sport,2017-02-07,sport,pull-up,repetitions,12-12-10-10-10
 A real-world example of this format (Types specs) can be seen in section [Group4Layers use case (or why CSV Types)](#group4layers-use-case-or-why-csv-types).
 
 ## Installation
+
+```sh
+npm i csv-types -S
+```
+
+Or from the repo:
 
 ```sh
 npm i "http://github.com/rNoz/csv-types-js.git"

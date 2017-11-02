@@ -3,7 +3,7 @@ var assert = require('assert');
 
 var tests = require('./tests.defs');
 
-var CSV = require('../src/index');
+var CSV = require('../');
 
 let cfgTest = {
   fail: function(m){

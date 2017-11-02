@@ -60,7 +60,7 @@ function configure(cfg){
 configure(null);
 
 const casters = {
-  'number': function(value, isHeader){
+  number: function(value, isHeader){
     let ret = value;
     if (!isHeader){
       if (/^[-+]?[\d.]+$/.test(value)){
@@ -72,9 +72,6 @@ const casters = {
 };
 
 function parse(str){
-  let headers = [];
-  let values = [];
-
   let types = {};
 
   let lDefType = null;
@@ -106,12 +103,11 @@ function parse(str){
   // }
 
   let i = 0;
-  let p1 = 0;
   let cont = true;
   let state = 0;
   while(cont){
     let char = str[i];
-    if (lastNL){
+    if (lastNL) {
       char = lastNL;
       lastNL = false; // finish
     }
@@ -123,15 +119,15 @@ function parse(str){
           if (optTypes && str.substr(i, 6) === '#type-'){
             state = 1; // header
             i += 5;
-            lType = "";
-            lStr = "";
+            lType = '';
+            lStr = '';
           } else if (!optTypes && !headerParsed) {
             state = 1;
-            lType = "";
+            lType = '';
             lTyped = true;
             lArray = [];
             lArrayLen = 0;
-            lStr = "";
+            lStr = '';
           }else{
             state = 3; // omit until EOL
           }
@@ -144,14 +140,14 @@ function parse(str){
           if (str.substr(i, 5) === 'type-'){
             state = 2; // value
             i += 4;
-            lType = "";
-            lStr = "";
+            lType = '';
+            lStr = '';
           }else{
             return opts.fail(`invalid row value in line ${line}:\n${str.substr(lineI, i - lineI + 1)}`);
           }
         }else if (!optTypes && headerParsed){
           state = 2; // value
-          lType = "";
+          lType = '';
           lTyped = true;
           lArray = [];
           lArrayLen = 0;
@@ -159,7 +155,7 @@ function parse(str){
           lStr = char;
         }else if (!optTypes && optFirstHeader){
           state = 1;
-          lType = "";
+          lType = '';
           lTyped = true;
           lArray = [];
           lArrayLen = 0;
@@ -170,7 +166,7 @@ function parse(str){
         break;
       case 1: // header
         if (char === '\n' || char === ','){
-          if (lStr === ""){
+          if (lStr === ''){
             return opts.fail(`invalid header '${lStr}' in line ${line} col ${i - lineI + 1}:\n${str.substr(lineI, i - lineI + 1)}`);
           }else{
             if (lTyped){
@@ -180,7 +176,7 @@ function parse(str){
             }else{
               lType = lStr;
               lTyped = true;
-              lStr = "";
+              lStr = '';
               lArray = [];
               lArrayLen = 0;
             }
@@ -226,7 +222,7 @@ function parse(str){
             }else if (char === '"'){
               lDQuotedOpen = false;
             }else if (char === '\n'){
-                return opts.fail(`invalid row with open escaped double quote and reach EOL in line ${line} col ${i - lineI + 1}:\n${str.substr(lineI, i - lineI + 1)}`);
+              return opts.fail(`invalid row with open escaped double quote and reach EOL in line ${line} col ${i - lineI + 1}:\n${str.substr(lineI, i - lineI + 1)}`);
             }
           }else{
             if (lTyped){
@@ -252,7 +248,7 @@ function parse(str){
               }
               lType = lStr;
               lTyped = true;
-              lStr = "";
+              lStr = '';
               lArray = [];
               lArrayLen = 0;
               lDQuoted = false;
@@ -269,7 +265,7 @@ function parse(str){
               if (optHeaders && lDefType.hlength !== lArrayLen){
                 return opts.fail(`invalid row length ${lArrayLen} (header length ${lDefType.hlength}) in line ${line} col ${i - lineI + 1}:\n${str.substr(lineI,  i - lineI + 1)}`);
               }
-              let insert = optRow ? optRow(lArray, lType, lDefType, lValues) != false : true;
+              let insert = optRow ? optRow(lArray, lType, lDefType, lValues) !== false : true;
               if (insert){
                 lDefType.values.push(lArray);
                 lValues++;
@@ -322,7 +318,7 @@ function parse(str){
 }
 
 module.exports = {
-  version: { major: 0, minor: 2, patch: 3 },
+  version: { major: 0, minor: 2, patch: 4 },
   parse,
   configure,
   casters,
