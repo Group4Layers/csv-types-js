@@ -6,6 +6,8 @@ CSV Types (csv-types-js) is a JavaScript library to parse CSV (comma separated v
 
 It has been tested with `node >= 6`.
 
+Online tools: [![Build Status](https://travis-ci.org/rNoz/csv-types-js.svg?branch=master)](https://travis-ci.org/rNoz/csv-types-js) [![Coverage Status](https://coveralls.io/repos/github/rNoz/csv-types-js/badge.svg?branch=master)](https://coveralls.io/github/rNoz/csv-types-js?branch=master)
+
 ## Table of Contents
 
 1. [Description](#description)
