@@ -1,0 +1,14 @@
+sudo: false
+
+dist: trusty
+
+language: node_js
+
+install:
+  - npm install
+
+script: 
+  - npm test
+
+after_success:
+  - npm run coverage
