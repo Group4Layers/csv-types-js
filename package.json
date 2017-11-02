@@ -1,0 +1,60 @@
+{
+  "name": "csv-types",
+  "version": "0.2.3",
+  "description": "CSV Types (csv-types-js) is a JavaScript library to parse CSV (comma separated values) strings and produce a JavaScript AST (abstract syntax tree) with the data. It also supports types specs: multiple headers-values (tables) per csv string.",
+  "main": "dist/node/index.js",
+  "module": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/mocha.js",
+    "test-stop": "./node_modules/mocha/bin/mocha --bail test/mocha.js",
+    "clean": "rm -rf dist",
+    "build": "npm run clean; babel --no-comments --minified src --out-dir dist/node",
+    "prepublishOnly": "npm run clean; npm run build",
+    "coverage": "nyc ./node_modules/mocha/bin/mocha test/mocha.js",
+    "coverage-html": "nyc --reporter=html ./node_modules/mocha/bin/mocha test/mocha.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rNoz/csv-types-js.git"
+  },
+  "keywords": [
+    "CSV",
+    "csv",
+    "types",
+    "flexible",
+    "table",
+    "parser",
+    "reader"
+  ],
+  "author": "rNoz",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1"
+  },
+  "babelrc": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": ">1%",
+            "node": [
+              "current"
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  "files": [
+    "src",
+    "dist",
+    "LICENSE.md",
+    "README.md"
+  ]
+}
