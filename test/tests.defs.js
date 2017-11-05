@@ -66,9 +66,6 @@ type-b,uno,tres
 
   {
     test: 'escaped by double quotes',
-    // expected: {
-    //   fail: 'failed'
-    // },
     expected: {
       "a": {
         headers: ["1", "2", "3"],
@@ -209,11 +206,10 @@ type-a," 1", 2 ,"  tres  "
 `
   },
 
-  // TODO Faltaría probar casos chungos donde se produzcan errores
   {
     test: 'open escape double quotes fail',
     expected: {
-      fail: 'invalid row with open escaped double quote and reach EOL in line 3 col 19:\ntype-a,1,"2 , tres\n'
+      fail: 'invalid row with open escaped char " and reach EOL in line 3 col 19:\ntype-a,1,"2 , tres\n'
     },
     cfg: {
       types: true,
@@ -221,6 +217,125 @@ type-a," 1", 2 ,"  tres  "
     input: `
 #type-a,1,2,3
 type-a,1,"2 , tres
+`
+  },
+  {
+    test: 'open escape single quotes fail (custom escape char)',
+    expected: {
+      fail: 'invalid row with open escaped char \' and reach EOL in line 3 col 19:\ntype-a,1,\'2 , tres\n'
+    },
+    cfg: {
+      types: true,
+      escape: "'",
+    },
+    input: `
+#type-a,1,2,3
+type-a,1,'2 , tres
+`
+  },
+
+  {
+    test: 'no header definition works (no types, no headers)',
+    expected: {
+      headers: [],
+      hlength: 0,
+      values: [["type-b", "1", "2", "tres"]],
+      vlength: 1,
+    },
+    cfg: {
+      types: false,
+      headers: false,
+    },
+    input: `
+type-b,1,2 , tres
+`
+  },
+
+  {
+    test: 'discard comments',
+    expected: {
+      headers: ["str", "num"],
+      hlength: 2,
+      values: [],
+      vlength: 0,
+    },
+    cfg: {
+      escape: "'",
+    },
+    input: `
+#str,num
+#a,1,'2 , tres
+`
+  },
+  {
+    test: 'discard comments (custom comment char)',
+    expected: {
+      headers: [],
+      hlength: 0,
+      values: [],
+      vlength: 0,
+    },
+    cfg: {
+      headers: false,
+      comment: '-',
+    },
+    input: `
+-type-a,1,2,3
+-type-a,1,'2 , tres
+`
+  },
+  {
+    test: 'use custom delimiter char (; with no headers)',
+    expected: {
+      headers: [],
+      hlength: 0,
+      values: [['type-a,1,\'2 , tres']],
+      vlength: 1,
+    },
+    cfg: {
+      headers: false,
+      delimiter: ';',
+    },
+    input: `
+#type-a,1;2,3
+type-a,1,'2 , tres
+`
+  },
+  {
+    test: 'use custom delimiter char (; with one col)',
+    expected: {
+      headers: ['type-a,1', ',2,3'],
+      hlength: 2,
+      values: [['type-a,1,\'2', ', tres']],
+      vlength: 1,
+    },
+    cfg: {
+      delimiter: ';',
+    },
+    input: `
+#type-a,1;,2,3
+type-a,1,'2 ;, tres
+`
+  },
+
+  {
+    test: 'use custom delimiter, escape and comment chars',
+    expected: {
+      headers: ['field', 'num', 'str'],
+      hlength: 3,
+      values: [['escaped; as you see', '243', 'string'], ['escaped', 'as you see', '243']],
+      vlength: 2,
+    },
+    cfg: {
+      comment: '%',
+      escape: '`',
+      delimiter: ';',
+    },
+  input: `
+%field;num;str
+% comment
+\`escaped; as you see\`;243;string
+\`escaped\`; as you see;243
 `
   },
 
@@ -239,7 +354,6 @@ type-b,1,"2 , tres
   },
 
   {
-    // wip: true,
     test: 'no header definition fails (no types)',
     expected: {
       fail: 'invalid row (no header definition) in line 2 col 1:\nt',
@@ -491,7 +605,7 @@ type-a,1,2,tres,3
     },
     cfg: {
       types: false,
-      headers: false, // only used with types: false
+      headers: false,
     },
     input: `
 #type-a,1,2,3
@@ -516,7 +630,7 @@ type-b,1,2,tres,longer,
     },
     cfg: {
       types: true,
-      headers: false, // only used with types: false
+      headers: false,
     },
     input: `
 #type-a,1,2,3
@@ -541,7 +655,7 @@ type-a,1,2,tres
     },
     cfg: {
       types: true,
-      headers: false, // only used with types: false
+      headers: false,
       cast: function(value, isHeader, type, column){
         let ret = value;
         if (isHeader){
@@ -577,7 +691,7 @@ type-a,1,2,tres
     },
     cfg: {
       types: true,
-      headers: false, // does nothing
+      headers: false,
       cast: true,
     },
     input: `
@@ -600,7 +714,7 @@ type-a,-1,-2.34,34tres
     },
     cfg: {
       types: false,
-      headers: false, // only used with types: false
+      headers: false,
       cast: function(value, isHeader, type, column, row){
         let ret = value;
         if (/^[\d.]+$/.test(value)){
@@ -673,7 +787,7 @@ type-b,1,2,tres
     },
     cfg: {
       types: false,
-      headers: false, // only used with types: false
+      headers: false,
       row: function(array, type, definition, row){
         let sum = 0;
         let i = 0;
@@ -763,6 +877,80 @@ tye-b,4,0,-1
     },
     input: `
 type-a,b,c,d
+type-a,1,2,3
+tye-b,4,0,-1
+`
+  },
+  {
+    test: 'firstLineHeader only works when headers is true',
+    expected: {
+      headers: [],
+      hlength: 0,
+      values: [
+        ["type-a", "b", "c", "d"],
+        ["type-a", "1", "2", "3"],
+        ["tye-b", "4", "0", "-1"],
+      ],
+      vlength: 3,
+    },
+    cfg: {
+      firstLineHeader: true,
+      headers: false,
+    },
+    input: `
+type-a,b,c,d
+type-a,1,2,3
+tye-b,4,0,-1
+`
+  },
+  {
+    test: 'firstLineHeader is true (with headers)',
+    expected: {
+      headers: ["type-a", "b", "c", "d"],
+      hlength: 4,
+      values: [
+        ["type-a", "1", "2", "3"],
+        ["tye-b", "4", "0", "-1"],
+      ],
+      vlength: 2,
+    },
+    cfg: {
+      firstLineHeader: true,
+      headers: true,
+    },
+    input: `
+type-a,b,c,d
+type-a,1,2,3
+tye-b,4,0,-1
+`
+  },
+
+  {
+    test: 'wrong options are discarded',
+    expected: {
+      headers: ["type-a", "b", "c", "d"],
+      hlength: 4,
+      values: [
+        ["type-a", "1", "2", "3"],
+        ["tye-b", "4", "0", "-1"],
+      ],
+      vlength: 2,
+    },
+    cfg: {
+      fail: 'f',
+      trim: 2,
+      trimEscaped: /x/g,
+      types: -4,
+      headers: {},
+      firstLineHeader: [],
+      delimiter: 'xx',
+      escape: true,
+      comment: false,
+      cast: "x",
+      row: `r`,
+    },
+    input: `
+#type-a,b,c,d
 type-a,1,2,3
 tye-b,4,0,-1
 `

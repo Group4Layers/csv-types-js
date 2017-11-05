@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v0.3.0 (2017-11-05)
+
+**Enhancements:**
+
+- Supported custom delimiter, escape and comment characters in options.
+- Coverage in branches reach up to 98.6%.
+
+**News:**
+
+- Added ebert analysis online tool.
+- Repository promoted to the Group4Layers organization.
+- New "minor" version to update the changes.
+
+**Statistics:**
+
+- 42 TDD Tests.
+- Code coverage of 98.7%.
+
 ## v0.2.4 (2017-11-02)
 
 **News:**

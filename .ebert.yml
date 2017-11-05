@@ -1,0 +1,14 @@
+---
+styleguide: plataformatec/linters
+engines:
+  fixme:
+    enabled: true
+  eslint:
+    enabled: true
+  remark-lint:
+    enabled: true
+exclude_paths:
+- test
+- coverage
+- node_modules
+- .nyc_output

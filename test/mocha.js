@@ -3,7 +3,7 @@ var assert = require('assert');
 
 var tests = require('./tests.defs');
 
-var CSV = require('../');
+var CSV = require('../').CSV;
 
 let cfgTest = {
   fail: function(m){
@@ -22,12 +22,14 @@ describe('CSV Types Parser', function() {
         let expected = test.expected;
         let cfg = test.cfg;
 
-        CSV.configure(null);
-        cfg = cfg || {};
-        cfg.fail = cfgTest.fail;
-        CSV.configure(cfg);
+        if (cfg != null){
+          cfg = cfg || {};
+          cfg.fail = cfgTest.fail;
+        }
+        let lCSV = new CSV(cfg);
+        // lCSV.configure(cfg);
 
-        let out = CSV.parse(input);
+        let out = lCSV.parse(input);
 
         assert.deepEqual(out, expected);
       });
