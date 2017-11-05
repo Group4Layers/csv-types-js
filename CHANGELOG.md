@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v0.3.1 (2017-11-05)
+
+**News:**
+
+- Added target inch and online tool (grade A reach).
+- Source file documented following jsdoc3.
+- Concise docs are included in the repo (GitHub pages).
+- New "patch" version to update the minor changes.
+- New NPM package version.
+
 ## v0.3.0 (2017-11-05)
 
 **Enhancements:**

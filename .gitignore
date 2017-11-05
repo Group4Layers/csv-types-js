@@ -1,10 +1,5 @@
 # -*- mode: conf; -*-
 
-build/
-*.log
-package-lock.json
-
-
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~
@@ -136,3 +131,11 @@ typings/
 
 
 # End of https://www.gitignore.io/api/node
+
+
+## Custom Repo rules
+
+/docs.json
+build/
+*.log
+package-lock.json

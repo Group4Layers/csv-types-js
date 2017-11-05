@@ -4,9 +4,11 @@
 
 CSV Types (csv-types-js) is a JavaScript library to parse CSV strings (comma separated values and text files with fields delimited by a character) and produce a JavaScript AST (abstract syntax tree) with the data. It also supports *types specs*: multiple headers-values (tables) per csv string.
 
-Online tools: [![Build Status](https://travis-ci.org/Group4Layers/csv-types-js.svg?branch=master)](https://travis-ci.org/Group4Layers/csv-types-js) [![Coverage Status](https://coveralls.io/repos/github/Group4Layers/csv-types-js/badge.svg?branch=master)](https://coveralls.io/github/Group4Layers/csv-types-js?branch=master) [![Ebert](https://ebertapp.io/github/Group4Layers/csv-types-js.svg)](https://ebertapp.io/github/Group4Layers/csv-types-js)
+Online tools: [![Build Status](https://travis-ci.org/Group4Layers/csv-types-js.svg?branch=master)](https://travis-ci.org/Group4Layers/csv-types-js) [![Coverage Status](https://coveralls.io/repos/github/Group4Layers/csv-types-js/badge.svg?branch=master)](https://coveralls.io/github/Group4Layers/csv-types-js?branch=master) [![Ebert](https://ebertapp.io/github/Group4Layers/csv-types-js.svg)](https://ebertapp.io/github/Group4Layers/csv-types-js) [![Inline Docs](https://inch-ci.org/github/Group4Layers/csv-types-js.svg)](https://inch-ci.org/github/Group4Layers/csv-types-js)
 
 This library is commonly used with [FlexTable](https://github.com/Group4Layers/flextable) to facilitate the data manipulation produced by CSV Types (the data structure is consumed by FlexTable).
+
+### [Repo](https://github.com/Group4Layers/csv-types-js) &nbsp;&nbsp; [Docs](https://group4layers.github.io/csv-types-js/) &nbsp;&nbsp; [NPM package](https://www.npmjs.com/package/csv-types)
 
 ## Table of Contents
 
@@ -14,8 +16,8 @@ This library is commonly used with [FlexTable](https://github.com/Group4Layers/f
 1. [Installation](#installation)
 1. [Examples](#examples)
 1. [Options](#options)
-1. [Test & Coverage](#test-coverage)
 1. [Group4Layers use case (or why CSV Types)](#group4layers-use-case-or-why-csv-types)
+1. [Test & Coverage](#test--coverage)
 1. [New features](#new-features)
 1. [Author](#author)
 1. [ChangeLog](#changelog)
@@ -147,7 +149,7 @@ type-a,2,3
 ```
 
 ```js
-const CSV = require('csv-types');
+const CSV = require('csv-types').CSV;
 let lCSV = new CSV();
 let results = lCSV.parse(`#type-a,col1,col2
 type-a,1,2

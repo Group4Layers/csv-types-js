@@ -1,11 +1,13 @@
 {
   "name": "csv-types",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "CSV Types (csv-types-js) is a JavaScript library to parse CSV strings (comma separated values and text files with fields delimited by a character) and produce a JavaScript AST (abstract syntax tree) with the data. It also supports *types specs*: multiple headers-values (tables) per csv string.",
   "main": "src/index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha test/mocha.js",
     "test-stop": "./node_modules/.bin/mocha --bail test/mocha.js",
+    "docs": "./node_modules/.bin/jsdoc -c .jsdoc.json",
+    "inch": "./node_modules/.bin/inchjs list",
     "lint": "./node_modules/.bin/eslint src && echo 'OK Lint'",
     "coverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha test/mocha.js",
     "coveralls": "npm run coverage; ./node_modules/.bin/nyc report --reporter=text-lcov | coveralls",
@@ -37,6 +39,9 @@
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
     "eslint": "^4.10.0",
+    "inchjs": "^0.4.1",
+    "jsdoc": "^3.5.5",
+    "minami": "^1.2.3",
     "mocha": "^4.0.1",
     "nyc": "^11.2.1"
   },
