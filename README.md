@@ -4,7 +4,7 @@
 
 CSV Types (csv-types-js) is a JavaScript library to parse CSV strings (comma separated values and text files with fields delimited by a character) and produce a JavaScript AST (abstract syntax tree) with the data. It also supports *types specs*: multiple headers-values (tables) per csv string.
 
-Online tools: [![Build Status](https://travis-ci.org/Group4Layers/csv-types-js.svg?branch=master)](https://travis-ci.org/Group4Layers/csv-types-js) [![Coverage Status](https://coveralls.io/repos/github/Group4Layers/csv-types-js/badge.svg?branch=master)](https://coveralls.io/github/Group4Layers/csv-types-js?branch=master) [![Ebert](https://ebertapp.io/github/Group4Layers/csv-types-js.svg)](https://ebertapp.io/github/Group4Layers/csv-types-js) [![Inline Docs](https://inch-ci.org/github/Group4Layers/csv-types-js.svg)](https://inch-ci.org/github/Group4Layers/csv-types-js)
+Online tools: [![Build Status](https://travis-ci.org/Group4Layers/csv-types-js.svg?branch=master)](https://travis-ci.org/Group4Layers/csv-types-js) [![Coverage Status](https://coveralls.io/repos/github/Group4Layers/csv-types-js/badge.svg?branch=master)](https://coveralls.io/github/Group4Layers/csv-types-js?branch=master) [![SourceLevel](https://app.sourcelevel.io/github/Group4Layers/-/csv-types-js.svg)](https://app.sourcelevel.io/github/Group4Layers/-/csv-types-js) [![Inline Docs](https://inch-ci.org/github/Group4Layers/csv-types-js.svg)](https://inch-ci.org/github/Group4Layers/csv-types-js)
 
 This library is commonly used with [FlexTable](https://github.com/Group4Layers/flextable) to facilitate the data manipulation produced by CSV Types (the data structure is consumed by FlexTable).
 
